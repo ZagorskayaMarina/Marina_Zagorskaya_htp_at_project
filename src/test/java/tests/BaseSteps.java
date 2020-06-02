@@ -6,7 +6,7 @@ import web_driver.Config;
 import web_driver.Driver;
 
 public class BaseSteps {
-    @BeforeClass
+    /*@BeforeClass
     public void initDriver() {
         Driver.initDriver(Config.CHROME);
     }
@@ -14,5 +14,5 @@ public class BaseSteps {
     @AfterClass
     public void closeDriver() {
         Driver.destroy();
-    }
+    }*/
 }

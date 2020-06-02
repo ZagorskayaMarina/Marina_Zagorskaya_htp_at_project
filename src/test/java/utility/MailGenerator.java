@@ -1,4 +1,4 @@
-package application_items.booking;
+package utility;
 
 import java.util.Random;
 import java.util.stream.Collectors;

@@ -15,32 +15,23 @@
                 <version>2.21.0</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
-                    </argLine>
                     <includes>
-                        <include>**/RunTests.java</include>
+                        <!--<include>**/RunTests.java</include>-->
+                        <include>**/FakeRunner.java</include>
+                        <include>**/FakeRunner2.java</include>
                     </includes>
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.28.v20200408</version>
-                <configuration>
-                    <supportedPackagings>jar</supportedPackagings>
-                    <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
-                    <stopKey>stop</stopKey>
-                    <stopPort>1234</stopPort>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>13</source> <!-- 1.8,1.9,1.10,11,12,13 -->
                     <target>13</target>
+                    <!--<release>13</release>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -164,19 +155,9 @@
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-maven-plugin</artifactId>
-            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -197,14 +178,4 @@
             <scope>compile</scope>
         </dependency>-->
     </dependencies>
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <plugins>
-            <plugin>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-maven-plugin</artifactId>
-                <version>2.5</version>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>

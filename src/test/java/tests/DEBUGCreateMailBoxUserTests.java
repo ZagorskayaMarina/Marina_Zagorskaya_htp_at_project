@@ -5,15 +5,18 @@ import org.openqa.selenium.WebDriver;
 import web_driver.Driver;
 import web_pages.TrashMailRegistration;
 
-public class CreateMailBoxUserTests {
+import java.io.IOException;
+
+public class DEBUGCreateMailBoxUserTests {
     static WebDriver driver;
     TrashMailRegistration mailboxRegistration;
 
     //@BeforeClass
     @Test
-    public void createTempMail() throws InterruptedException {
+    public void createTempMail() throws InterruptedException, IOException {
         driver = Driver.getDriver();
         mailboxRegistration = new TrashMailRegistration(driver);
-        mailboxRegistration.createMail(driver);
+        mailboxRegistration.createDisposableEmailAddress(driver);
+        //mailboxRegistration.createMail(driver);
     }
 }

@@ -3,8 +3,36 @@ package web_driver;
 import org.openqa.selenium.WebDriver;
 
 public class Driver {
+    private static  ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private Driver() throws IllegalAccessException{
+    public static void initDriver(Config config) {
+        if (null == driver.get()) {
+            try {
+                driver.set(DriverManager.getDriver(config));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static WebDriver getDriver() {
+        if (null == driver.get()) {
+            try {
+                driver.set(DriverManager.getDriver(Config.CHROME)); //Config.REMOTE
+                System.out.println("Print from Driver");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return driver.get();
+    }
+
+    public static void destroy() {
+        driver.get().close();
+        driver.get().quit();
+    }
+
+    /*private Driver() throws IllegalAccessException{
         throw new IllegalAccessException("Utility class");
     }
 
@@ -27,5 +55,5 @@ public class Driver {
     public static void destroy() {
         driver.close();
         driver.quit();
-    }
+    }*/
 }
