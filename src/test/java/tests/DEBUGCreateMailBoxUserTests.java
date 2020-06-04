@@ -16,7 +16,7 @@ public class DEBUGCreateMailBoxUserTests {
     public void createTempMail() throws InterruptedException, IOException {
         driver = Driver.getDriver();
         mailboxRegistration = new TrashMailRegistration(driver);
-        mailboxRegistration.createDisposableEmailAddress(driver);
-        //mailboxRegistration.createMail(driver);
+        mailboxRegistration.createTempEmail();
+        mailboxRegistration.createUser();
     }
 }

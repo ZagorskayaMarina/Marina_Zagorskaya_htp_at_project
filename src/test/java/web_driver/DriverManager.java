@@ -30,6 +30,7 @@ public class DriverManager {
         System.out.println("Print from getChromeDriver");
         ChromeOptions options = new ChromeOptions();
         options.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+        options.addArguments("--start-maximized");
         //options.addArguments("--headless"); //head chrom window
         //options.addArguments("--disable-gpu");
         //options.addArguments("--window-size=1920,1200");
