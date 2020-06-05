@@ -16,10 +16,9 @@ public class EmailChecker {
     @FindBy(xpath = "//a[@data-statlog='notifications.mail.logout.title']")
     private WebElement postLink;
 
-    @FindBy(xpath = "//a[contains(@class, '_sign-in-button')]")
-    private WebElement signInPostAcc;
-
-    @FindBy(xpath = "//input[contains(@id, 'passp-field-login')]")
+    //@FindBy(xpath = "//*[@id= 'passp-field-login']")
+    //@FindBy(id = "passp-field-login")
+    @FindBy(css = "input[name=\"login\"]")
     private WebElement login;
 
     @FindBy(xpath = "//div[contains(@class, 'passp-sign-in-button')]//button[@type='submit']")
@@ -42,10 +41,10 @@ public class EmailChecker {
         PageFactory.initElements(this.driver, this);
     }
 
-    public void loginInPost(WebDriver driver){
+    public void loginInPost() throws InterruptedException {
         driver.navigate().to("https://yandex.by/");
         postLink.click();
-        signInPostAcc.click();
+        Thread.sleep(3000);
         login.click();
         login.sendKeys("ee1vp@yandex.by");
         submitLogin.click();
@@ -54,7 +53,7 @@ public class EmailChecker {
         passwordSubmit.click();
     }
 
-    public void confirmRegistration(WebDriver driver){
+    public void confirmRegistration(){
         letterSearch.click();
         confirmation.click();
     }
