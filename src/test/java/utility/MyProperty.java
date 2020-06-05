@@ -31,14 +31,4 @@ public class MyProperty {
         }
     }
 
-    public static String readPropValue(String path, String propName) {
-        String propValue = null;
-        try (InputStream input = new FileInputStream(path)) {
-            propValue = prop.getProperty(propName);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return propValue;
-    }
-
 }

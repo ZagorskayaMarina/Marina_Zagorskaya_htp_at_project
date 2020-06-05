@@ -14,13 +14,13 @@ public class DEBUGCreateMailBoxUserTests {
     EmailChecker emailChecker;
 
     //@BeforeClass
-    /*@Test
+    @Test
     public void createTempMail() throws InterruptedException, IOException {
         driver = Driver.getDriver();
         mailboxRegistration = new TrashMailRegistration(driver);
         mailboxRegistration.createTempEmail();
         mailboxRegistration.createUser();
-    }*/
+    }
 
     @Test
     public void checkRealEmail() throws InterruptedException {

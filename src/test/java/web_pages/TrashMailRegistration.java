@@ -97,7 +97,6 @@ public class TrashMailRegistration {
         MyProperty.setProperties(propPath, "TRASHMAIL_PSW", randomPassword);
         repeatPassword.click();
         repeatPassword.sendKeys(randomPassword);
-        //realEmail.sendKeys(MyProperty.readPropValue(propPath, "REAL_MAIL"));
         Thread.sleep(2000);
         register.click();
     }

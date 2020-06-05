@@ -1,5 +1,6 @@
 package web_pages;
 
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,16 +46,26 @@ public class EmailChecker {
         driver.navigate().to("https://yandex.by/");
         postLink.click();
         Thread.sleep(3000);
+        String parentHandle = driver.getWindowHandle();
+        for(String childHandle : driver.getWindowHandles()){
+            if (!childHandle.equals(parentHandle)){
+                driver.switchTo().window(childHandle);
+            }
+        }
         login.click();
-        login.sendKeys("ee1vp@yandex.by");
+        //login.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
+        login.sendKeys("maryna2424@yandex.by"); //КОСТЫЛИ! БРАТЬ ИЗ mail.properties
         submitLogin.click();
+        Thread.sleep(3000);
         passwordField.click();
-        passwordField.sendKeys("MarEE1!");
+        passwordField.sendKeys("zaqxswcde");
         passwordSubmit.click();
     }
 
-    public void confirmRegistration(){
+    public void confirmRegistration() throws InterruptedException {
+        Thread.sleep(2000);
         letterSearch.click();
+        Thread.sleep(2000);
         confirmation.click();
     }
 }
