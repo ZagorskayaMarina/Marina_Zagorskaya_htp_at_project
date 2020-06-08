@@ -51,6 +51,15 @@ public class MainBookingPage {
     @FindBy(xpath = "//a[contains(@class,'email-resend')]")
     private WebElement emailResend;
 
+    @FindBy(xpath = "//li[@id='current_account']/a")
+    private WebElement loginToCurrentAcc;
+
+    @FindBy(xpath = "//input[@id='username']")
+    private WebElement userName;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement submitsForLogin;
+
     public MainBookingPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
@@ -81,6 +90,17 @@ public class MainBookingPage {
         } else {
             return false;
         }
+    }
+
+    public void login() throws InterruptedException {
+        driver.navigate().to("https://booking.com/");
+        Thread.sleep(2000);
+        loginToCurrentAcc.click();
+        userName.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
+        submitsForLogin.click();
+        Thread.sleep(2000);
+        password.sendKeys(MyProperty.getProperties(propPath).getProperty("BOOKING_PSW"));
+        submitsForLogin.click();
     }
 
     public void enterCity(String city) {

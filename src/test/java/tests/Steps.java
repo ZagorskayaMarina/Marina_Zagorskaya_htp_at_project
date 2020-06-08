@@ -25,5 +25,10 @@ public class Steps {
         Assert.assertTrue(mainBookingPage.verifyAccActivation());
     }
 
+    @Test
+    public void verifyNextTrip(){
+
+    }
+
 
 }
