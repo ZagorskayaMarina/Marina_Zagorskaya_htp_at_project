@@ -1,6 +1,5 @@
 package web_pages;
 
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +16,6 @@ public class EmailChecker {
     @FindBy(xpath = "//a[@data-statlog='notifications.mail.logout.title']")
     private WebElement postLink;
 
-    //@FindBy(xpath = "//*[@id= 'passp-field-login']")
-    //@FindBy(id = "passp-field-login")
     @FindBy(css = "input[name=\"login\"]")
     private WebElement login;
 
@@ -33,6 +30,9 @@ public class EmailChecker {
 
     @FindBy(xpath = "//span[contains(@title, 'TrashMail.com - E-Mail Registration')][1]")
     private WebElement letterSearch;
+
+    @FindBy(xpath = "//")
+    private WebElement bookingLeterSearch;
 
     @FindBy(xpath = "//a[contains(@href,'confirm_email')]")
     private WebElement confirmation;
@@ -53,16 +53,17 @@ public class EmailChecker {
             }
         }
         login.click();
-        //login.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
-        login.sendKeys("maryna2424@yandex.by"); //КОСТЫЛИ! БРАТЬ ИЗ mail.properties
+        login.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
+        //login.sendKeys("maryna2424@yandex.by"); //КОСТЫЛИ! БРАТЬ ИЗ mail.properties
         submitLogin.click();
         Thread.sleep(3000);
         passwordField.click();
-        passwordField.sendKeys("zaqxswcde");
+        //passwordField.sendKeys("zaqxswcde");
+        passwordField.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_PSW"));
         passwordSubmit.click();
     }
 
-    public void confirmRegistration() throws InterruptedException {
+    public void comfirmTrushRegistration() throws InterruptedException {
         Thread.sleep(2000);
         letterSearch.click();
         Thread.sleep(2000);

@@ -18,11 +18,8 @@ public class MoscowTests {
         System.setProperty("webdriver.chrome.driver", "c:\\Users\\user\\Java\\webdrivers\\chrome\\chromedriver.exe");
         System.setProperty("webdriver.chrome.silentOutput", "true");
         driver = new ChromeDriver();
-        //driver.navigate().to("https://booking.com/");
-        driver.navigate().to("https://trashmail.com/");
-        WebElement el = driver.findElement(By.xpath("//*[@id='fe-name']"));
+        driver.navigate().to("https://booking.com/");
 
-        /*
         WebElement el = driver.findElement(By.cssSelector(".c-autocomplete__input"));
         Actions builder = new Actions(driver);
         builder.click(el).sendKeys("Москва").click().perform();
@@ -69,8 +66,7 @@ public class MoscowTests {
         int price = Integer.parseInt(priceFromCategory);
 
         WebElement sortData = driver.findElement(By.xpath("//*[contains(@class,'sort_category   sort_price')]/a"));
-        sortData.click();*/
-/*
+        sortData.click();
         Thread.sleep(4000);
 
         WebElement betterPriceHotel = driver.findElement(By.xpath("//*[contains(@class,'bui-price-display__value')][1]"));
@@ -86,7 +82,7 @@ public class MoscowTests {
         //assert priceDay >= price: "No way";
 
         driver.close();
-        driver.quit();*/
+        driver.quit();
 
     }
 }

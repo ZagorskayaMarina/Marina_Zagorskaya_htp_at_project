@@ -4,6 +4,7 @@ import application_items.Search;
 import application_items.WS.Case;
 import application_items.WS.ResponseObject;
 import application_items.WS.UserFromResponse;
+import application_items.booking.BookingTestData;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
@@ -13,22 +14,6 @@ import java.util.Properties;
 public class GsonParser {
     public final static  String JSON = "src/test/resources/testData.json";
     public final static  String JSONExpRes = "src\\test\\resources\\expectedResults.json";
-
-    /*private static Properties getTestProperties() {
-        Properties prop = new Properties();
-
-        try (InputStream input = new FileInputStream("Marina_Zagorskaya_project/src/test/resources/path.properties")) {
-            prop.load(input);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return prop;
-    }
-
-    public final static  String JSON = getTestProperties().getProperty("JSON");
-    public final static String JSONExpRes = getTestProperties().getProperty("JSONExpRes");*/
 
     public Case parseGSON(int i) throws FileNotFoundException {
         Gson gson = new Gson();
@@ -51,6 +36,12 @@ public class GsonParser {
         Gson gson = new Gson();
         UserFromResponse[] users = gson.fromJson(new JsonReader(new FileReader(JSONExpRes)), UserFromResponse[].class);
         return users[i];
+    }
+
+    public BookingTestData parseGSONBookingData(String path, int i) throws FileNotFoundException {
+        Gson gson = new Gson();
+        BookingTestData[] testData = gson.fromJson(new JsonReader(new FileReader(path)), BookingTestData[].class);
+        return testData[i];
     }
 
 }

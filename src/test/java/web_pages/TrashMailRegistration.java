@@ -1,6 +1,7 @@
 package web_pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import utility.MailGenerator;
 import utility.PasswordGenerator;
 import org.openqa.selenium.WebDriver;
@@ -24,16 +25,17 @@ public class TrashMailRegistration {
     @FindBy (xpath = "//*[@id='fe-forward']")
     private WebElement realEmail;
 
-    //@FindBy (xpath = "//*[@id='fe-fwd-nb']//following-sibling::div//option[@label='1 day']")
-    @FindBy(xpath = "//*[@id='fe-fwd-nb']//following-sibling::div")
-    private WebElement numberOfForwards;
+    @FindBy(xpath = "//button[contains(., 'unlimited')]")
+    private WebElement forwards;
 
-   /* @FindBy(xpath = "//*[@id='fe-fwd-nb']/option[contains(text(), '1')]")
-    private WebElement firstFromNumberOfForwards;*/
+    @FindBy(xpath = "//span[@class='ng-binding' and text()='10']")
+    private WebElement setForwards;
 
-    //@FindBy (xpath = "//*[@id='fe-fwd-nb']//following-sibling::div//option[@label='10']")
-    @FindBy(xpath = "//*[@id='fe-mob-life-span']/option[contains(text(), '1 day')]")
-    private WebElement lifeSpan;
+    @FindBy(xpath = "//button[contains(., '1 week')]")
+    private static WebElement life;
+
+    @FindBy(xpath = "//span[@class='ng-binding' and text()='1 day']")
+    private static WebElement setLife;
 
     @FindBy (xpath = "//*[@id='fe-submit']")
     private WebElement createDisposableEmailAddress;
@@ -74,7 +76,17 @@ public class TrashMailRegistration {
         realEmail.click();
         MyProperty.setProperties(propPath, "REAL_MAIL", "ee1vp@yandex.by");
         realEmail.sendKeys(properties.getProperty("REAL_MAIL"));
+
+        forwards.click();
+        Thread.sleep(3000);
+        setForwards.click();
+        life.click();
+        setLife.click();
+
         createDisposableEmailAddress.click();
+        Thread.sleep(2000);
+
+        //этот алерт не появляется если еше есть попытки, просто происходит редирект на Your alias was created successfully.
         if (driver.findElements(By.className("alert ng-scope top am-fade alert-danger")).size() > 0){
             createUser();
         }
