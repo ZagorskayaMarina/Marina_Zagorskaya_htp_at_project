@@ -46,7 +46,7 @@ public class HotelsPage {
 
     String starsTreeXpathPattern = "//*[@id='filter_class']//*[contains(@data-id, 'class-%s')]";
     public void selectStarsOfHotel(int stars) throws InterruptedException {
-
+        builder = new Actions(driver);
         WebElement threeStars = driver.findElement(By.xpath(String.format(starsTreeXpathPattern, stars)));
         builder.click(threeStars).perform();
         
@@ -69,6 +69,7 @@ public class HotelsPage {
     }
 
     public void focusMouse(WebElement address) {
+        builder = new Actions(driver);
         builder.moveToElement(address).build().perform();
     }
 
