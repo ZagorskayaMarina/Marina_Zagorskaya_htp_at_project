@@ -1,63 +1,81 @@
 package web_pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import utility.MyProperty;
 import web_driver.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import static web_driver.Driver.getDriver;
+
 public class HeaderMainBooking {
-    WebDriver driver = Driver.getDriver();
+    public static WebDriver driver = Driver.getDriver();
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
 
     @FindBy(xpath = "//div[@id='cross-product-bar']/div/span")
-    private WebElement stays;
+    public WebElement stays;
 
     @FindBy(xpath = "//a[@data-decider-header='flights']")
-    private WebElement flights;
+    public WebElement flights;
 
-    @FindBy(xpath = "//a[contains(@rentalcars,'rentalcars ')]")
-    private WebElement carRentals;
+    @FindBy(xpath = "//a[contains(@data-ga-track,'rentalcars ')]")
+    public WebElement carRentals;
 
     @FindBy(xpath = "//a[@data-decider-header='attractions']")
-    private WebElement attractions;
+    public WebElement attractions;
 
     @FindBy(xpath = "//a[@data-decider-header='rideways']")
-    private WebElement taxis;
+    public WebElement taxis;
 
     @FindBy(xpath = "//a[@data-title='Choose your currency']")
-    private WebElement currency;
+    public WebElement currency;
 
     @FindBy(xpath = "//a[@data-title='Select your language']")
-    private WebElement language;
+    public WebElement language;
 
     @FindBy(xpath = "//a[@data-title='View your notifications']")
-    private WebElement notifications;
+    public WebElement notifications;
 
-    @FindBy(xpath = "//a[@data-title='Customer Service Help Centre']")
-    private WebElement helpCenter;
+    @FindBy(xpath = "//a[contains(@data-title, 'Help')]")
+    public WebElement helpCenter;
 
     @FindBy(xpath = "//li[@id='add_property_topbar']")
-    private WebElement property;
+    public WebElement property;
 
     @FindBy(xpath = "//li[@id='current_account']")
-    private WebElement currentAcc;
+    public WebElement currentAcc;
 
     @FindBy(xpath = "//*[@id='logo_no_globe_new_logo']")
-    private WebElement logo;
+    public WebElement logo;
 
     public HeaderMainBooking(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(this.driver, this);
     }
 
-    public boolean verifyDisplayingElements(){
-        List<WebElement> elements = new ArrayList<>();
+    public Boolean isElementPresented(WebElement element){
+        Boolean elementCondition = false;
+        try{
+            elementCondition = element.isDisplayed();
+        }
+        catch (NoSuchElementException e){
+            return  elementCondition;
+        }
 
+        if(!elementCondition){
+            System.out.println(element);
+        }
+
+        return elementCondition;
     }
+
 
 }

@@ -120,7 +120,7 @@ public class MainBookingPage {
         driver.findElement(By.xpath(String.format("//*[contains(@data-date,'%s')]", plusDayOfStay))).click();
         driver.findElement(By.xpath(String.format("//*[contains(@data-date,'%s')]", datePlusStay))).click();
     }
-// //*[@class = 'bui-stepper__display']
+
     public void enterGuestData(int adults, int children, int rooms) {
         WebElement guestField = driver.findElement(By.xpath("//*[contains(@for, 'xp__guests__input')]"));
         guestField.click();
