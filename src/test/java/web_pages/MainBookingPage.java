@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class MainBookingPage {
-    WebDriver driver = Driver.getDriver();
+    WebDriver driver;
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
 
@@ -60,6 +60,12 @@ public class MainBookingPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitsForLogin;
 
+    @FindBy(css = ".c-autocomplete__input")
+    private WebElement city;
+
+    @FindBy(xpath = "//div[contains(@class, 'db_panel ')]/a//span[@class='list_nr']")
+    private WebElement myList;
+
     public MainBookingPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
@@ -76,6 +82,13 @@ public class MainBookingPage {
         password.sendKeys(MyProperty.getProperties(propPath).getProperty("TRASHMAIL_PSW"));
         cofirmPSW.sendKeys(MyProperty.getProperties(propPath).getProperty("TRASHMAIL_PSW"));
         submit.click();
+    }
+
+    public void goToDashboard() throws InterruptedException {
+        yourAccount.click();
+        dashboard.click();
+        Thread.sleep(2000);
+
     }
 
     public boolean verifyAccActivation() throws InterruptedException {
@@ -147,6 +160,17 @@ public class MainBookingPage {
     public void search() throws InterruptedException {
         driver.findElement(By.xpath("//*[contains(@class, 'sb-searchbox__button')]")).click();
         Thread.sleep(2000);
+    }
+
+    public void cleanCityData(){
+        city.clear();
+    }
+
+    public int retrieveNumberOfTrips(){
+        String trips = myList.getText();
+        String str = trips.replaceAll("[^0-9]+","");
+        int tripsInt = Integer.parseInt(str);
+        return tripsInt;
     }
 
 }

@@ -56,16 +56,7 @@ public class Debbuger {
 
     @Test
     public void testBooking() throws InterruptedException, FileNotFoundException {
-        driver = Driver.getDriver();
-        driver.navigate().to("https://www.booking.com/");
-        MainBookingPage mainBookingPage = new MainBookingPage(driver);
-        GsonParser gsonParser = new GsonParser();
-        String JSONBookingTests = "src/test/resources/booking/bookingTestsData.json";
-        BookingTestData test = gsonParser.parseGSONBookingData(JSONBookingTests, 0);
-        mainBookingPage.enterCity(test.city);
-        mainBookingPage.enterDate(test.dayBeforeStartDate,test.dayOfStay);
-        mainBookingPage.enterGuestData(test.adults,test.children,test.rooms);
-        mainBookingPage.search();
+
     }
 
     @Test

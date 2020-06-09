@@ -1,21 +1,26 @@
 package web_pages;
 
-import application_items.Ingredient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import web_driver.Driver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class HotelsPage {
-    WebDriver driver = Driver.getDriver();
-    Actions builder = new Actions(driver);
+    WebDriver driver;
+    Actions builder;
+
+    @FindBy(xpath = "//nav[@aria-label='Pagination']//li[contains(@class, 'pages')]//ul/li[10]")
+    private WebElement lastHotelsPage;
+
+    public HotelsPage(WebDriver driver){
+        this.driver = driver;
+        PageFactory.initElements(this.driver, this);
+    }
 
     String priceCategoryPattern = "//*[@id='filter_price']//a[%s]/label/div";
     public void selectPriceCategory(int idPriceCategory) {
@@ -74,4 +79,20 @@ public class HotelsPage {
     public void changeTextColor(WebElement address) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.color = 'red'", address);
     }
+
+    String heartOfElement = "//div[@id='hotellist_inner']//div[contains(@class, 'photo')]['%s']//button[@type='button']";
+    public void saveHotel(String i){
+        driver.findElement(By.xpath(String.format(heartOfElement, i))).click();
+    }
+
+    String numberOfPageInPagination = "//nav[@aria-label='Pagination']//li[contains(@class, 'pages')]//ul/li[last()]";
+    public void selectLastPage(){
+        driver.findElement(By.xpath(numberOfPageInPagination)).click();
+    }
+
+    public String getColor(){
+        String heartColor = driver.findElement(By.xpath(heartOfElement)).getAttribute("style");
+        return heartColor;
+    }
+
 }
