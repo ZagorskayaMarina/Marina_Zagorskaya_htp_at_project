@@ -28,13 +28,6 @@ public class MoscowSteps {
     int priceOfHotel;
     int budgetCategory;
 
-
-    @Before
-    public static void beforeTest(){
-        LOGGER.info("Initializing WebDriver");
-        Driver.initDriver(Config.CHROME);
-    }
-
     @And("I compare price Moscow")
     public void comparePriceMoscow(){
         System.out.println("priceOfHotel is: " + priceOfHotel + " budgetCategory is: " + budgetCategory);

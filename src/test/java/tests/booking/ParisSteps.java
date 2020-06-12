@@ -30,11 +30,11 @@ public class ParisSteps {
     int budgetCategory;
 
 
-    @Before
+    /*@Before
     public static void beforeTest(){
         LOGGER.info("Initializing WebDriver");
         Driver.initDriver(Config.CHROME);
-    }
+    }*/
 
     @Given("I go to site '(.*)'")
     public void goToSite(String site) throws InterruptedException {
