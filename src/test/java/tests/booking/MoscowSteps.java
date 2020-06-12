@@ -18,7 +18,7 @@ import web_pages.MainBookingPage;
 import java.io.FileNotFoundException;
 
 public class MoscowSteps {
-    /*private static final Logger LOGGER = LogManager.getLogger(ParisSteps.class);
+    private static final Logger LOGGER = LogManager.getLogger(ParisSteps.class);
     static WebDriver driver;
     String JSONBookingTests = "src/test/resources/booking/bookingTestsData";
     MainBookingPage mainBookingPage;
@@ -35,17 +35,17 @@ public class MoscowSteps {
         Driver.initDriver(Config.CHROME);
     }
 
-    @Given("I go to booking.com")
-    public void goToSite() throws InterruptedException {
+    @Given("I go to '(.*)'")
+    public void goToSite(String city) throws InterruptedException {
         driver = Driver.getDriver();
-        driver.navigate().to("https://booking.com/");
+        driver.navigate().to(city);
         Thread.sleep(3000);
     }
 
-    @Then("I get data to search from JSON file")
-    public void enterData() throws FileNotFoundException, InterruptedException {
+    @Then("I get data to search from JSON file '(.*)' element in array")
+    public void enterData(int i) throws FileNotFoundException, InterruptedException {
         gsonParser  = new GsonParser();
-        test = gsonParser.parseGSONBookingData(JSONBookingTests, 2);
+        test = gsonParser.parseGSONBookingData(JSONBookingTests, i);
         mainBookingPage = new MainBookingPage(driver);
         mainBookingPage.enterCity(test.city);
         mainBookingPage.enterDate(test.dayBeforeStartDate,test.dayOfStay);
@@ -54,7 +54,7 @@ public class MoscowSteps {
         Thread.sleep(3000);
     }
 
-    @And("I select hotel in max price category")
+    @And("I select '(.*)' price category")
     public void selectPriceCategory1() throws InterruptedException {
         hotelsPage = new HotelsPage(driver);
         hotelsPage.selectPriceCategory(1);
@@ -62,17 +62,16 @@ public class MoscowSteps {
         Thread.sleep(3000);
     }
 
-    @And("I find hotel with min price")
-    public void filterPrice() throws FileNotFoundException, InterruptedException {
-        hotelsPage.sortByPrice();
+    @And("I select '(.*)' hotel in list")
+    public void selectHotel() throws FileNotFoundException, InterruptedException {
         Thread.sleep(3000);
         test = gsonParser.parseGSONBookingData(JSONBookingTests, 1);//need refactoring
         priceOfHotel = hotelsPage.getPriceOfHotelPerNight(1, test.dayOfStay);
     }
 
     @And("I compare hotel's category price with price of hotel")
-    public void comparePrice(){
+    public void comparePriceMoscow(){
         System.out.println("priceOfHotel is: " + priceOfHotel + " budgetCategory is: " + budgetCategory);
         Assert.assertTrue("Verify that the price per night in hotel more than priseOfCathegory", priceOfHotel>budgetCategory);
-    }*/
+    }
 }
