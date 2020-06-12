@@ -44,7 +44,7 @@ public class BookingWithoutAuthTests {
     }
 
     @Test
-    public void moskowTest() throws FileNotFoundException, InterruptedException {
+    public void moscowTest() throws FileNotFoundException, InterruptedException {
         driver = Driver.getDriver();
         gsonParser  = new GsonParser();
         BookingTestData test = gsonParser.parseGSONBookingData(JSONBookingTests, 2);

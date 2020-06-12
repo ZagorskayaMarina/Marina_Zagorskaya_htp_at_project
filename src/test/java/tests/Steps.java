@@ -70,7 +70,7 @@ public class Steps {
     }
 
     @Test
-    public void verifyDisplayingAllHeadeElem() throws InterruptedException {
+    public void verifyDisplayingAllHeaderElem() throws InterruptedException {
         driver = Driver.getDriver();
         mainBookingPage = new MainBookingPage(driver);
         mainBookingPage.login();
