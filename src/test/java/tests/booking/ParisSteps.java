@@ -1,7 +1,6 @@
 package tests.booking;
 
 import application_items.booking.BookingTestData;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -10,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import utility.GsonParser;
-import web_driver.Config;
 import web_driver.Driver;
 import web_pages.HotelsPage;
 import web_pages.MainBookingPage;
@@ -29,12 +27,13 @@ public class ParisSteps {
     int priceOfHotel;
     int budgetCategory;
 
+    public int getPriceOfHotel() {
+        return priceOfHotel;
+    }
 
-    /*@Before
-    public static void beforeTest(){
-        LOGGER.info("Initializing WebDriver");
-        Driver.initDriver(Config.CHROME);
-    }*/
+    public int getBudgetCategory() {
+        return budgetCategory;
+    }
 
     @Given("I go to site '(.*)'")
     public void goToSite(String site) throws InterruptedException {
