@@ -36,7 +36,7 @@ public class ParisSteps {
         Driver.initDriver(Config.CHROME);
     }
 
-    @Given("I go to '(.*)'")
+    @Given("I go to site '(.*)'")
     public void goToSite(String site) throws InterruptedException {
         driver = Driver.getDriver();
         driver.navigate().to(site);
@@ -44,7 +44,7 @@ public class ParisSteps {
     }
 
     @Then("I get data to search from JSON file '(.*)' element in array")
-    public void enterData(int i) throws FileNotFoundException, InterruptedException {
+    public void getData(int i) throws FileNotFoundException, InterruptedException {
         gsonParser  = new GsonParser();
         test = gsonParser.parseGSONBookingData(JSONBookingTests, i);
         mainBookingPage = new MainBookingPage(driver);
@@ -55,7 +55,7 @@ public class ParisSteps {
         Thread.sleep(3000);
     }
 
-    @And("I select hotel in '(.*)' price category")
+    @And("I select hotel in  price category '(.*)'")
     public void selectPriceCategory(int i) throws InterruptedException {
         hotelsPage = new HotelsPage(driver);
         hotelsPage.selectPriceCategory(i);
@@ -63,10 +63,14 @@ public class ParisSteps {
         Thread.sleep(3000);
     }
 
-    @And("I find price of '(.*)' hotel")
-    public void filterPrice(int i) throws FileNotFoundException, InterruptedException {
+    @And("I sort hotels by price from min to max")
+    public void sortHotels() throws InterruptedException {
         hotelsPage.sortByPrice();
         Thread.sleep(3000);
+    }
+
+    @And("I select '(.*)' hotel")
+    public void selectHotel(int i) throws FileNotFoundException{
         test = gsonParser.parseGSONBookingData(JSONBookingTests, 1);//need refactoring
         priceOfHotel = hotelsPage.getPriceOfHotelPerNight(i, test.dayOfStay);
     }
