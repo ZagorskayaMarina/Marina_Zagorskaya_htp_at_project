@@ -28,6 +28,7 @@ public class MoscowSteps {
 
     @Given("I go2 to site '(.*)'")
     public void goToSite2(String site) throws InterruptedException {
+        LOGGER.debug("I go2 to site");
         driver = Driver.getDriver();
         driver.navigate().to(site);
         Thread.sleep(3000);
@@ -35,6 +36,7 @@ public class MoscowSteps {
 
     @Then("I get2 data to search from JSON file '(.*)' element in array")
     public void getData2(int i) throws FileNotFoundException, InterruptedException {
+        LOGGER.debug("I get2 data to search from JSON file");
         gsonParser  = new GsonParser();
         test = gsonParser.parseGSONBookingData(JSONBookingTests, i);
         mainBookingPage = new MainBookingPage(driver);
@@ -51,6 +53,7 @@ public class MoscowSteps {
 
     @And("I select2 hotel in  price category '(.*)'")
     public void selectPriceCategory2(int i) throws InterruptedException {
+        LOGGER.debug("I select2 hotel in  price category");
         hotelsPage = new HotelsPage(driver);
         hotelsPage.selectPriceCategory(i);
         budgetCategory = hotelsPage.retrievePriceFromCategory(i);
@@ -59,12 +62,14 @@ public class MoscowSteps {
 
     @And("I select2 '(.*)' hotel")
     public void selectHotel2(int i) throws FileNotFoundException {
+        LOGGER.debug("I select2 hotel");
         test = gsonParser.parseGSONBookingData(JSONBookingTests, 1);//need refactoring
         priceOfHotel = hotelsPage.getPriceOfHotelPerNight(i, test.dayOfStay);
     }
 
     @And("I compare2 price Moscow")
     public void comparePrice2() {
+        LOGGER.debug("I compare2 price Moscow");
         System.out.println("priceOfHotel is: " + priceOfHotel + " budgetCategory is: " + budgetCategory);
         Assert.assertTrue("Verify that the price per night in hotel more than priseOfCathegory", priceOfHotel < budgetCategory);
     }

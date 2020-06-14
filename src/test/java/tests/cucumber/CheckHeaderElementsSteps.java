@@ -19,13 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckHeaderElementsSteps {
-    private static final Logger LOGGER = LogManager.getLogger(ParisSteps.class);
+    private static final Logger LOGGER = LogManager.getLogger(CheckHeaderElementsSteps.class);
     static WebDriver driver;
     MainBookingPage mainBookingPage;
     HeaderMainBooking headerMainBooking;
 
     @Given("I go5 to site '(.*)'")
     public void goToSite5(String site) throws InterruptedException {
+        LOGGER.debug("I go5 to site");
         driver = Driver.getDriver();
         driver.navigate().to(site);
         Thread.sleep(3000);
@@ -33,6 +34,7 @@ public class CheckHeaderElementsSteps {
 
     @Then("I login3")
     public void login3() throws InterruptedException {
+        LOGGER.debug("I login3");
         mainBookingPage = new MainBookingPage(driver);
         mainBookingPage.login();
         Thread.sleep(3000);
@@ -40,6 +42,7 @@ public class CheckHeaderElementsSteps {
 
     @And("I check displaying all header elements")
     public void check_displaying_all_header_elements(){
+        LOGGER.debug("I check displaying all header elements");
         Boolean displayingCondition = false;
         headerMainBooking = new HeaderMainBooking(driver);
         List<WebElement> elements = new ArrayList<>();
