@@ -21,6 +21,7 @@ public class RegistrationOnBookingTests {
 
     @Given("I go6 to site '(.*)'")
     public void goToSite6(String site) throws InterruptedException {
+        LOGGER.debug("I go6 to site");
         driver = Driver.getDriver();
         driver.navigate().to(site);
 
@@ -29,12 +30,14 @@ public class RegistrationOnBookingTests {
 
     @Then("I create new trash mail")
     public void createAcc() throws InterruptedException {
+        LOGGER.debug("I create new trash mail");
         mailboxRegistration = new TrashMailRegistration(driver);
         mailboxRegistration.createTempEmail();
     }
 
     @Then("I confirm new account")
     public void confirmNewEmail() throws InterruptedException {
+        LOGGER.debug("I confirm new account");
         emailChecker = new EmailChecker(driver);
         emailChecker.loginInPost();
         emailChecker.comfirmTrushRegistration();
@@ -42,18 +45,21 @@ public class RegistrationOnBookingTests {
 
     @And("I go7 to site '(.*)'")
     public void goToSite7(String site) throws InterruptedException {
+        LOGGER.debug("I go7 to site");
         driver.navigate().to(site);
         Thread.sleep(3000);
     }
 
     @Then("I create booking account")
     public void createBookingAcc() throws InterruptedException {
+        LOGGER.debug("I create booking account");
         mainBookingPage = new MainBookingPage(driver);
         mainBookingPage.createAccount();
     }
 
     @And("I check that user is not active")
     public void checkNotActivatedUser() throws InterruptedException {
+        LOGGER.debug("I check that user is not active");
         Assert.assertTrue(mainBookingPage.verifyAccActivation());
     }
 

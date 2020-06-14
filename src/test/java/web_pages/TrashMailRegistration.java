@@ -1,7 +1,8 @@
 package web_pages;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 import utility.MailGenerator;
 import utility.PasswordGenerator;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utility.MyProperty;
-
-import java.io.IOException;
 import java.util.Properties;
 
 public class TrashMailRegistration {
+    public static final Logger LOGGER = LogManager.getLogger(TrashMailRegistration.class);
     WebDriver driver;
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
@@ -65,24 +65,34 @@ public class TrashMailRegistration {
     }
 
     public void createTempEmail() throws InterruptedException {
+        LOGGER.debug("Create Temporary Email");
 
         Thread.sleep(2000);
+        LOGGER.debug(newDisposableEmailAddress);
         newDisposableEmailAddress.click();
         String disposableEmailAddress = MailGenerator.generateRandomMail();
+        LOGGER.debug(newDisposableEmailAddress);
         newDisposableEmailAddress.clear();
         newDisposableEmailAddress.sendKeys(disposableEmailAddress);
         disposableEmailAddress = disposableEmailAddress.concat("@trashmail.com");
         MyProperty.setProperties(propPath, "TRASHMAIL", disposableEmailAddress);
+        LOGGER.debug(realEmail);
         realEmail.click();
         MyProperty.setProperties(propPath, "REAL_MAIL", "ee1vp@yandex.by");
+        LOGGER.debug(realEmail);
         realEmail.sendKeys(properties.getProperty("REAL_MAIL"));
 
+        LOGGER.debug(forwards);
         forwards.click();
         Thread.sleep(3000);
+        LOGGER.debug(setForwards);
         setForwards.click();
+        LOGGER.debug(life);
         life.click();
+        LOGGER.debug(setLife);
         setLife.click();
 
+        LOGGER.debug(createDisposableEmailAddress);
         createDisposableEmailAddress.click();
         Thread.sleep(2000);
 
@@ -94,22 +104,29 @@ public class TrashMailRegistration {
     }
 
     public void createUser() throws InterruptedException {
+        LOGGER.debug("createUser");
+        LOGGER.debug(newUserTab);
         newUserTab.click();
         Thread.sleep(2000);
+        LOGGER.debug(userName);
         userName.click();
         String trashMailUserName = MailGenerator.generateRandomMail();
         userName.sendKeys(trashMailUserName);
         MyProperty.setProperties(propPath, "TRASHMAIL_USER", trashMailUserName);
+        LOGGER.debug(password);
         password.click();
 
         PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder().useDigits(true).useLower(true).useUpper(true).build();
 
         String randomPassword = passwordGenerator.generate(15);
+        LOGGER.debug(password);
         password.sendKeys(randomPassword);
         MyProperty.setProperties(propPath, "TRASHMAIL_PSW", randomPassword);
+        LOGGER.debug(repeatPassword);
         repeatPassword.click();
         repeatPassword.sendKeys(randomPassword);
         Thread.sleep(2000);
+        LOGGER.debug(register);
         register.click();
     }
 

@@ -1,5 +1,7 @@
 package web_pages;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +11,8 @@ import utility.MyProperty;
 import java.util.Properties;
 
 public class EmailChecker {
+
+    public static final Logger LOGGER = LogManager.getLogger(EmailChecker.class);
     WebDriver driver;
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
@@ -43,7 +47,9 @@ public class EmailChecker {
     }
 
     public void loginInPost() throws InterruptedException {
+        LOGGER.debug("Login in real email");
         driver.navigate().to("https://yandex.by/");
+        LOGGER.debug(postLink);
         postLink.click();
         Thread.sleep(3000);
         String parentHandle = driver.getWindowHandle();
@@ -52,21 +58,27 @@ public class EmailChecker {
                 driver.switchTo().window(childHandle);
             }
         }
+        LOGGER.debug(login);
         login.click();
         login.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
         //login.sendKeys("maryna2424@yandex.by"); //КОСТЫЛИ! БРАТЬ ИЗ mail.properties
+        LOGGER.debug(submitLogin);
         submitLogin.click();
         Thread.sleep(3000);
+        LOGGER.debug(passwordField);
         passwordField.click();
-        //passwordField.sendKeys("zaqxswcde");
         passwordField.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_PSW"));
+        LOGGER.debug(passwordSubmit);
         passwordSubmit.click();
     }
 
     public void comfirmTrushRegistration() throws InterruptedException {
         Thread.sleep(2000);
+        LOGGER.debug("Confirm TrushEmail Registration");
+        LOGGER.debug(letterSearch);
         letterSearch.click();
         Thread.sleep(2000);
+        LOGGER.debug(letterSearch);
         confirmation.click();
     }
 }

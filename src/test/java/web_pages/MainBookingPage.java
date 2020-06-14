@@ -1,5 +1,7 @@
 package web_pages;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class MainBookingPage {
+    public static final Logger LOGGER = LogManager.getLogger(MainBookingPage.class);
     WebDriver driver;
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
@@ -72,32 +75,48 @@ public class MainBookingPage {
     }
 
     public void createAccount() throws InterruptedException {
+        LOGGER.debug("Create account on ");
         driver.navigate().to("https://booking.com/");
         Thread.sleep(2000);
+        LOGGER.debug(signIn);
         signIn.click();
         Thread.sleep(2000);
+        LOGGER.debug(login);
         login.sendKeys(MyProperty.getProperties(propPath).getProperty("TRASHMAIL"));
+        LOGGER.debug(confirmEmail);
         confirmEmail.click();
         Thread.sleep(2000);
+        LOGGER.debug(password);
         password.sendKeys(MyProperty.getProperties(propPath).getProperty("TRASHMAIL_PSW"));
+        LOGGER.debug(cofirmPSW);
         cofirmPSW.sendKeys(MyProperty.getProperties(propPath).getProperty("TRASHMAIL_PSW"));
+        LOGGER.debug(submit);
         submit.click();
     }
 
     public void goToDashboard() throws InterruptedException {
+        LOGGER.debug("Go To Dashboard");
+        LOGGER.debug(yourAccount);
         yourAccount.click();
+        LOGGER.debug(dashboard);
         dashboard.click();
         Thread.sleep(2000);
 
     }
 
     public boolean verifyAccActivation() throws InterruptedException {
+        LOGGER.debug("Verify Account Activation");
         Thread.sleep(3000);
+        LOGGER.debug(closeWelcom);
         closeWelcom.click();
+        LOGGER.debug(yourAccount);
         yourAccount.click();
+        LOGGER.debug(dashboard);
         dashboard.click();
+        LOGGER.debug(settings);
         settings.click();
         Thread.sleep(2000);
+        LOGGER.debug(emailResend);
         if (emailResend.isDisplayed()){
             return true;
         } else {
@@ -106,21 +125,29 @@ public class MainBookingPage {
     }
 
     public void login() throws InterruptedException {
+        LOGGER.debug("login to");
         driver.navigate().to("https://booking.com/");
         Thread.sleep(2000);
+        LOGGER.debug(loginToCurrentAcc);
         loginToCurrentAcc.click();
+        LOGGER.debug(userName);
         userName.sendKeys(MyProperty.getProperties(propPath).getProperty("REAL_MAIL"));
+        LOGGER.debug(submitsForLogin);
         submitsForLogin.click();
         Thread.sleep(2000);
+        LOGGER.debug(password);
         password.sendKeys(MyProperty.getProperties(propPath).getProperty("BOOKING_PSW"));
+        LOGGER.debug(submitsForLogin);
         submitsForLogin.click();
     }
 
     public void enterCity(String city) {
+        LOGGER.debug("Enter City");
         driver.findElement(By.cssSelector(".c-autocomplete__input")).sendKeys(city);
     }
 
     public void enterDate(int dayBeforeStartDate, int dayOfStay) {
+        LOGGER.debug("Enter Date");
         driver.findElement(By.xpath("//*[@id='frm']//descendant::div[@class='xp__dates xp__group']")).click();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, dayBeforeStartDate);
@@ -135,6 +162,7 @@ public class MainBookingPage {
     }
 
     public void enterGuestData(int adults, int children, int rooms) {
+        LOGGER.debug("Enter Guest Data");
         WebElement guestField = driver.findElement(By.xpath("//*[contains(@for, 'xp__guests__input')]"));
         guestField.click();
         WebElement adultPlus = driver.findElement(By.xpath("//*[contains(@aria-describedby, 'group_adults_desc')][2]"));
@@ -158,15 +186,19 @@ public class MainBookingPage {
     }
 
     public void search() throws InterruptedException {
+        LOGGER.debug("Search trip with enter city, dates, adults, rooms, children data");
         driver.findElement(By.xpath("//*[contains(@class, 'sb-searchbox__button')]")).click();
         Thread.sleep(2000);
     }
 
     public void cleanCityData(){
+        LOGGER.debug("Clear City Data");
         city.clear();
     }
 
     public int retrieveNumberOfTrips(){
+        LOGGER.debug("Retrieve Number Of Trips");
+        LOGGER.debug(myList);
         String trips = myList.getText();
         String str = trips.replaceAll("[^0-9]+","");
         int tripsInt = Integer.parseInt(str);

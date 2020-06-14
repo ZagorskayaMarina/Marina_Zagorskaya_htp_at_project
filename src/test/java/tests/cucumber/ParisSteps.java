@@ -87,6 +87,7 @@ public class ParisSteps {
 
     @Given("I go to site '(.*)'")
     public void goToSite(String site) throws InterruptedException {
+        LOGGER.debug("I go to site");
         driver = Driver.getDriver();
         driver.navigate().to(site);
         Thread.sleep(3000);
@@ -94,6 +95,7 @@ public class ParisSteps {
 
     @Then("I get data to search from JSON file '(.*)' element in array")
     public void getData(int i) throws FileNotFoundException, InterruptedException {
+        LOGGER.debug("I get data to search from JSON file");
         gsonParser  = new GsonParser();
         test = gsonParser.parseGSONBookingData(JSONBookingTests, i);
         mainBookingPage = new MainBookingPage(driver);
@@ -110,6 +112,7 @@ public class ParisSteps {
 
     @And("I select hotel in  price category '(.*)'")
     public void selectPriceCategory(int i) throws InterruptedException {
+        LOGGER.debug("I select hotel in  price category");
         hotelsPage = new HotelsPage(driver);
         hotelsPage.selectPriceCategory(i);
         budgetCategory = hotelsPage.retrievePriceFromCategory(i);
@@ -118,18 +121,21 @@ public class ParisSteps {
 
     @And("I sort hotels by price from min to max")
     public void sortHotels() throws InterruptedException {
+        LOGGER.debug("I sort hotels by price from min to max");
         hotelsPage.sortByPrice();
         Thread.sleep(3000);
     }
 
     @And("I select '(.*)' hotel")
     public void selectHotel(int i) throws FileNotFoundException {
+        LOGGER.debug("I select hotel");
         test = gsonParser.parseGSONBookingData(JSONBookingTests, 1);//need refactoring
         priceOfHotel = hotelsPage.getPriceOfHotelPerNight(i, test.dayOfStay);
     }
 
     @And("I compare hotel's category price with price of hotel")
     public void comparePrice() {
+        LOGGER.debug("I compare hotel's category price with price of hotel");
         System.out.println("priceOfHotel is: " + priceOfHotel + " budgetCategory is: " + budgetCategory);
         Assert.assertTrue("Verify that the price per night in hotel more than priseOfCathegory", priceOfHotel > budgetCategory);
     }
