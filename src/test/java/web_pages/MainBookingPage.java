@@ -42,7 +42,7 @@ public class MainBookingPage {
     @FindBy(xpath = "//a[@data-command='show-profile-menu']")
     private WebElement yourAccount;
 
-    @FindBy(xpath = "//div[@id='profile-menu']/div/a[contains(@href, 'https://secure.booking.com/mydashboard')]")
+    @FindBy(xpath = "//div[@id='profile-menu']/div") //div[@id='profile-menu']/div/a[contains(@href, 'https://secure.booking.com/mydashboard')]
     private WebElement dashboard;
 
     @FindBy(xpath = "//a[@data-trackname='Settings']")

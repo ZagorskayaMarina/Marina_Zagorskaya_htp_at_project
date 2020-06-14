@@ -24,12 +24,13 @@ public class Debbuger {
 
 
     //@BeforeClass
-    /*@Test
+    @Test
     public void createTempMail() throws InterruptedException, IOException {
         driver = Driver.getDriver();
         mailboxRegistration = new TrashMailRegistration(driver);
+        driver.navigate().to("https://trashmail.com/");
         mailboxRegistration.createTempEmail();
-    }*/
+    }
 
     @Test
     public void checkRealEmail() throws InterruptedException {

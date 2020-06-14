@@ -45,7 +45,7 @@ public class TestsWS {
         String response = myHttpClient.search(search);
         UserFromResponse[] users = gsonParser.parseGSONResponse(response);
 
-        Assert.assertEquals(users.length, 4, "partialShort test Passed");
+        Assert.assertTrue(users.length==4, "partialShort test Passed");
     }
 
     @Test
@@ -68,7 +68,9 @@ public class TestsWS {
         String response = myHttpClient.search(search);
         UserFromResponse[] users = gsonParser.parseGSONResponse(response);
 
-        Assert.assertEquals(users.length, 6, "allUsers test Passed");
+        Assert.assertTrue(users.length==6, "allUsers test passed");
+
+        //Assert.assertEquals(users.length, 6, "allUsers test Passed");
     }
 
 }

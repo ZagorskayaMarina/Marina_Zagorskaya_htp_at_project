@@ -1,4 +1,4 @@
-package tests.booking;
+package tests.cucumber;
 
 
 import cucumber.api.java.After;
