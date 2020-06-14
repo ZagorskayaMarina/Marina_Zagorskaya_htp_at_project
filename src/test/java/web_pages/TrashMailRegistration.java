@@ -65,7 +65,7 @@ public class TrashMailRegistration {
     }
 
     public void createTempEmail() throws InterruptedException {
-        driver.navigate().to("https://trashmail.com/");
+
         Thread.sleep(2000);
         newDisposableEmailAddress.click();
         String disposableEmailAddress = MailGenerator.generateRandomMail();
@@ -86,7 +86,7 @@ public class TrashMailRegistration {
         createDisposableEmailAddress.click();
         Thread.sleep(2000);
 
-        //этот алерт не появляется если еше есть попытки, просто происходит редирект на Your alias was created successfully.
+        //этот алерт не появляется если еще есть попытки, просто происходит редирект на Your alias was created successfully.
         if (driver.findElements(By.className("alert ng-scope top am-fade alert-danger")).size() > 0){
             createUser();
         }

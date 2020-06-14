@@ -86,7 +86,7 @@ public class HotelsPage {
         driver.findElement(By.xpath(String.format(heartOfElement, i))).click();
     }
 
-    String numberOfPageInPagination = "//nav[@aria-label='Pagination']//li[contains(@class, 'pages')]//ul/li[last()]";
+    String numberOfPageInPagination = "//*[contains(@class, 'bui-pagination__item')][10]";// //nav[@aria-label='Pagination']//li[contains(@class, 'pages')]//ul/li[last()]
     public void selectLastPage(){
         driver.findElement(By.xpath(numberOfPageInPagination)).click();
     }

@@ -20,6 +20,7 @@ public class PreconditionSteps {
     public void createTempMail() throws InterruptedException, IOException {
         WebDriver driver = Driver.getDriver();
         mailboxRegistration = new TrashMailRegistration(driver);
+        driver.navigate().to("https://trashmail.com/");
         mailboxRegistration.createTempEmail();
     }
 
