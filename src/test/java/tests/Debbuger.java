@@ -10,6 +10,7 @@ import utility.MyProperty;
 import web_driver.Driver;
 import web_pages.EmailChecker;
 import web_pages.MainBookingPage;
+import web_pages.Silver;
 import web_pages.TrashMailRegistration;
 
 import java.io.FileNotFoundException;
@@ -66,5 +67,15 @@ public class Debbuger {
         String JSONBookingTests = "src/test/resources/booking/bookingTestsData";
         BookingTestData test = gsonParser.parseGSONBookingData(JSONBookingTests, 0);
         System.out.println(test.getAdults());
+    }
+
+    @Test
+    public void silverSearchWordTest() throws InterruptedException {
+        driver = Driver.getDriver();
+        driver.navigate().to("https://silverscreen.by/");
+        Silver silver = new Silver(driver);
+        silver.searchWord("автокинотеатр");
+        silver.containWord("автокинотеатр");
+
     }
 }
