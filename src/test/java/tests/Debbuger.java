@@ -2,6 +2,7 @@ package tests;
 
 import application_items.WS.UserFromResponse;
 import application_items.booking.BookingTestData;
+import cucumber.api.java.en.Then;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -76,6 +77,38 @@ public class Debbuger {
         Silver silver = new Silver(driver);
         silver.searchWord("автокинотеатр");
         silver.containWord("автокинотеатр");
-
     }
+
+    @Test
+    public void loginApp() throws InterruptedException {
+        driver = Driver.getDriver();
+        driver.navigate().to("https://silverscreen.by/");
+        Silver silver = new Silver(driver);
+        silver.moveCursorToElement();
+        silver.login("ee1vp@yandex.by", "11111Aa!");
+        silver.verifyDisplayingElement("//div[contains(@style, 'animation')]");
+    }
+
+    @Test
+    public void enterOnlyEmail() throws InterruptedException {
+        driver = Driver.getDriver();
+        driver.navigate().to("https://silverscreen.by/");
+        Silver silver = new Silver(driver);
+        silver.moveCursorToElement();
+        silver.enterEmail("ee1vp@yandex.by");
+        Thread.sleep(2000);
+        silver.verifyDisplayingElement("//*[contains(text(), 'Необходимо заполнить поле \"Пароль\"')]");
+    }
+
+    @Test
+    public void enterOnlyPSW() throws InterruptedException {
+        driver = Driver.getDriver();
+        driver.navigate().to("https://silverscreen.by/");
+        Silver silver = new Silver(driver);
+        silver.moveCursorToElement();
+        silver.enterPSW("11111Aa!");
+        Thread.sleep(2000);
+        silver.verifyDisplayingElement("//*[contains(text(), 'Необходимо заполнить поле \"E-mail\"')]");
+    }
+
 }

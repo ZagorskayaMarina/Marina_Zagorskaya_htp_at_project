@@ -6,13 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utility.MyProperty;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 public class Silver {
@@ -20,8 +19,10 @@ public class Silver {
     WebDriver driver;
     private String propPath = "src/test/resources/booking/mail.properties";
     private Properties properties = MyProperty.getProperties(propPath);
+    Actions action;
 
-    @FindBy(xpath = "//*[@id=\"svg-icon-search\"][1]")
+    @FindBy(css = "div>#svg-icon-search")
+    //@FindBy(xpath = "//*[@id=\"svg-icon-search\"][1]")
     private WebElement search;
 
     @FindBy(xpath = "//*[contains(@placeholder, \"Поиск\")]")
@@ -30,17 +31,26 @@ public class Silver {
     @FindBy(xpath = "//span[contains(text(), 'Вход и привилегии')]")
     private WebElement entry;
 
-    @FindBy(xpath = "//*[contains(@placeholder, 'E-mail')]")
-    private WebElement email;
-
-    @FindBy(xpath = "//*[contains(@placeholder, 'Пароль')]")
-    private WebElement psw;
-
     @FindBy(xpath = "//button[contains(text(), 'Войти')]")
     private WebElement submit;
 
+    @FindBy(xpath = "//*[contains(@type, 'email')]")
+    private WebElement emailField;
+
+    @FindBy(xpath = "//*[contains(@type, 'password')]")
+    private WebElement passwordField;
+
     @FindBy(xpath = "//div[contains(@style, 'animation')]")
     private WebElement clubLabel;
+
+    @FindBy(xpath = "//*[contains(text(), 'Необходимо заполнить поле \"E-mail\"')]")
+    private WebElement loginWarning;
+
+    @FindBy(xpath = "//*[contains(text(), 'Необходимо заполнить поле \"Пароль\"')]") //*[contains(text(), 'Необходимо')]
+    private WebElement passwordWarning;
+
+    @FindBy(xpath = "//*[contains(text(), 'Пользователь не найден')]")
+    private WebElement notAuthorisedUser;
 
     public Silver(WebDriver driver){
         this.driver = driver;
@@ -72,4 +82,31 @@ public class Silver {
         return labels;
     }
 
+    public void moveCursorToElement() throws InterruptedException {
+        action = new Actions(driver);
+        action.moveToElement(entry).build().perform();
+        Thread.sleep(2000);
+        LOGGER.debug("Cursor is moved to element");
+    }
+
+    public void login(String login, String password){
+        emailField.sendKeys(login);
+        passwordField.sendKeys(password);
+        submit.click();
+    }
+
+    public Boolean verifyDisplayingElement(String xpathString){
+        WebElement element = driver.findElement(By.xpath(xpathString));
+        return element.isDisplayed();
+    }
+
+    public void enterEmail(String email){
+        emailField.sendKeys(email);
+        submit.click();
+    }
+
+    public void enterPSW(String psw){
+        emailField.sendKeys(psw);
+        submit.click();
+    }
 }
